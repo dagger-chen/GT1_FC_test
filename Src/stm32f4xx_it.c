@@ -45,6 +45,7 @@ extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
 extern int rearLight_sign;
 extern int power_sign;
+extern int paster_test_sign;
 
 /******************************************************************************/
 /*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
@@ -198,7 +199,24 @@ void TIM3_IRQHandler(void)
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */
-	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_4);
+	paster_test_sign++;
+	if(1 == paster_test_sign){
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,1);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_5,0);
+		HAL_GPIO_WritePin(GPIOE,GPIO_PIN_9,0);
+	}else if(2 == paster_test_sign){
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,0);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_5,1);
+		HAL_GPIO_WritePin(GPIOE,GPIO_PIN_9,0);
+	}else if(3 == paster_test_sign){
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,0);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_5,0);
+		HAL_GPIO_WritePin(GPIOE,GPIO_PIN_9,1);
+		paster_test_sign = 0;
+	}
+		
+	
+	
 	if(power_sign > 0){
 		if(1 == HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0))
 			power_sign = 0;
