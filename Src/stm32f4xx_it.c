@@ -34,6 +34,7 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_it.h"
+#include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -199,6 +200,7 @@ void TIM3_IRQHandler(void)
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */
+	CDC_Transmit_FS("GT1 paster test\n\r", 18);
 	paster_test_sign++;
 	if(1 == paster_test_sign){
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,1);

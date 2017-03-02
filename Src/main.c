@@ -45,6 +45,7 @@
 #include "stm32f4xx_hal.h"
 #include "fatfs.h"
 #include "usb_device.h"
+#include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -163,7 +164,7 @@ int main(void)
 	if(power_sign >= 3)
 		HAL_GPIO_WritePin(GPIOE,GPIO_PIN_11,1);
   /* USER CODE BEGIN 3 */
-	
+	//CDC_Transmit_FS("GT1 paster test\n\r", 18);
   }
   /* USER CODE END 3 */
 
